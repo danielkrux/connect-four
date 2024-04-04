@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import React from "react";
 
-function Background({ className }) {
+function Background({ className }: { className: string }) {
   return (
     <svg className={className} width="197" height="165">
       <defs>
@@ -71,20 +71,17 @@ function Background({ className }) {
 
 export default function Status() {
   const backgroundClass =
-    "after:bg-darkpurple after:absolute after:bottom-0 after:left-0 after:right-0 after:h-1/4 after:rounded-t-[60px] after:-z-20";
+    "after:bg-darkpurple after:absolute after:bottom-0 after:left-0 after:right-0 after:h-1/3 after:rounded-t-[60px] after:-z-10";
 
-  const cls = clsx(
-    "flex items-center justify-center z-10 mt-5",
-    backgroundClass
-  );
+  const cls = clsx("flex items-center justify-center mt-5", backgroundClass);
 
   return (
     <div className={cls}>
-      <Background className="absolute -z-10 text-pink" />
-      <div className="flex flex-col items-center justify-center">
+      <div className="flex flex-col items-center justify-center z-10">
         <span className="text-xs text-white">Player 1&apos;s turn</span>
         <span className="text-l text-white">15s</span>
       </div>
+      <Background className="absolute text-pink" />
     </div>
   );
 }
