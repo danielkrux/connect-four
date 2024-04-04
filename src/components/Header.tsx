@@ -3,6 +3,7 @@
 import React from "react";
 import Logo from "./Logo";
 import { restartGame } from "@/actions";
+import RestartButton from "./RestartButton";
 
 export default function Header() {
   return (
@@ -11,18 +12,7 @@ export default function Header() {
         Menu
       </button>
       <Logo className="absolute left-1/2 -translate-x-1/2" />
-      <button
-        onClick={() => {
-          try {
-            restartGame();
-          } catch (e) {
-            console.error(e);
-          }
-        }}
-        className="bg-darkpurple text-white rounded-full px-6 py-2 text-xs uppercase"
-      >
-        Restart
-      </button>
+      <RestartButton />
     </div>
   );
 }

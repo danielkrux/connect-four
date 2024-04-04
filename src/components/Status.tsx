@@ -1,3 +1,4 @@
+import { getCurrentPlayer } from "@/actions";
 import clsx from "clsx";
 import React from "react";
 
@@ -53,7 +54,9 @@ function Background({ className }: { className: string }) {
   );
 }
 
-export default function Status() {
+export default async function Status() {
+  const currentPlayer = await getCurrentPlayer();
+
   const backgroundClass =
     "after:bg-darkpurple after:absolute after:bottom-0 after:left-0 after:right-0 after:h-1/3 after:rounded-t-[60px] after:-z-10";
 
@@ -62,10 +65,16 @@ export default function Status() {
   return (
     <div className={cls}>
       <div className="flex flex-col items-center justify-center z-10">
-        <span className="text-xs text-white">Player 1&apos;s turn</span>
+        <span className="text-xs text-white">
+          Player {currentPlayer}&apos;s turn
+        </span>
         <span className="text-l text-white">15s</span>
       </div>
-      <Background className="absolute text-pink" />
+      <Background
+        className={clsx("absolute text-pink", {
+          "text-yellow": currentPlayer === 2,
+        })}
+      />
     </div>
   );
 }

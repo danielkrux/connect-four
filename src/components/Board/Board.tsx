@@ -3,9 +3,8 @@ import clsx from "clsx";
 import { cookies } from "next/headers";
 
 import { Cell } from "../Cell";
+import { COLUMNS, ROWS } from "@/constants";
 
-const ROWS = 6;
-const COLUMNS = 7;
 const GRID: number[][] = Array(COLUMNS).fill(Array(ROWS).fill(0));
 
 export type BoardProps = {

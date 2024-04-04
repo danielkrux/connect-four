@@ -2,8 +2,12 @@ import Board from "@/components/Board";
 import Score from "@/components/Score";
 import Status from "@/components/Status";
 import Header from "@/components/Header";
+import { calculateWin } from "@/actions";
+import RestartButton from "@/components/RestartButton";
 
-export default function Game() {
+export default async function Game() {
+  const playerWon = await calculateWin();
+
   return (
     <main className="flex min-h-screen flex-col p-4">
       <Header />
@@ -12,7 +16,14 @@ export default function Game() {
         <Score player="two" score={23} />
       </div>
       <Board className="mt-12" />
-      <Status />
+      {!playerWon && <Status />}
+      {playerWon && (
+        <div className="bg-white border-3 shadow-container rounded-2xl px-7 flex flex-col items-center py-3 mx-4 -mt-4">
+          <span className="text-xs uppercase">player {playerWon}</span>
+          <span className="text-l uppercase">wins</span>
+          <RestartButton>Play again</RestartButton>
+        </div>
+      )}
     </main>
   );
 }
