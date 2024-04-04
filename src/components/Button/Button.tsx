@@ -17,7 +17,7 @@ export default function Button({
 }: ButtonProps) {
   const cls = clsx(
     className,
-    "p-5 rounded-2xl border-black border-3 shadow-button uppercase flex self-stretch text-m",
+    "p-5 rounded-2xl border-black border-3 shadow-container uppercase flex self-stretch text-m",
     {
       "bg-yellow": variant === "yellow",
       "bg-white": variant === "white",

@@ -20,28 +20,28 @@ const config: Config = {
         "56px",
         {
           lineHeight: "71px",
-          fontWeight: "600",
+          fontWeight: "700",
         },
       ],
       m: [
         "24px",
         {
           lineHeight: "31px",
-          fontWeight: "600",
+          fontWeight: "700",
         },
       ],
       s: [
         "20px",
         {
           lineHeight: "26px",
-          fontWeight: "600",
+          fontWeight: "700",
         },
       ],
       xs: [
         "16px",
         {
           lineHeight: "21px",
-          fontWeight: "600",
+          fontWeight: "700",
         },
       ],
       base: [
@@ -54,10 +54,14 @@ const config: Config = {
     },
     extend: {
       boxShadow: {
-        button: "0px 10px 0px rgba(0, 0, 0, 1)",
+        container: "0px 10px 0px rgba(0, 0, 0, 1)",
+        cell: "0px -2px 0px rgba(0, 0, 0, 1)",
       },
       borderWidth: {
         3: "3px",
+      },
+      rounded: {
+        "2xl": "20px",
       },
     },
   },
