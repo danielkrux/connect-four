@@ -1,12 +1,29 @@
+"use client";
+
 import React from "react";
+import { handleCellPress } from "@/actions";
+import clsx from "clsx";
 
 type CellProps = {
   rowIndex: number;
   cellIndex: number;
+  playedBy?: number;
 };
 
-export function Cell({ rowIndex, cellIndex }: CellProps) {
+export function Cell({ rowIndex, cellIndex, playedBy }: CellProps) {
+  const cls = clsx(
+    "rounded-full border-4 w-full max-w-12 aspect-square relative overflow-hidden",
+    {
+      "bg-pink": playedBy === 1,
+      "bg-yellow": playedBy === 2,
+      "bg-purple": !playedBy,
+    }
+  );
+
   return (
-    <div className="rounded-full bg-purple border-4 flex aspect-square relative overflow-hidden" />
+    <button
+      onClick={() => handleCellPress(rowIndex, cellIndex)}
+      className={cls}
+    />
   );
 }
