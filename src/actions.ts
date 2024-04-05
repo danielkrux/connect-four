@@ -101,6 +101,10 @@ export async function handleCellPress(rowIndex: number, columnIndex: number) {
   cookies().set("state", JSON.stringify(newState));
 }
 
+export async function startNextRound() {
+  cookies().set("state", JSON.stringify({}));
+}
+
 export async function restartGame() {
   cookies().set("wins", JSON.stringify({ 1: 0, 2: 0 }));
   cookies().set("state", JSON.stringify({}));
