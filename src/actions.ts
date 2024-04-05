@@ -75,13 +75,14 @@ export async function handleCellPress(rowIndex: number, columnIndex: number) {
   );
 
   let newLocation = `${rowIndex}:${columnIndex}`;
+  console.log(newLocation);
 
   if (cellsPlayedInColumn.length > ROWS) {
     return;
   }
 
   if (!cellsPlayedInColumn.length) {
-    newLocation = `${ROWS}:${columnIndex}`;
+    newLocation = `${ROWS - 1}:${columnIndex}`;
   } else {
     const lastCellPlayedInColumn =
       cellsPlayedInColumn[cellsPlayedInColumn.length - 1];

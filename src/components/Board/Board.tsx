@@ -5,7 +5,7 @@ import { cookies } from "next/headers";
 import { Cell } from "../Cell";
 import { COLUMNS, ROWS } from "@/constants";
 
-const GRID: number[][] = Array(COLUMNS).fill(Array(ROWS).fill(0));
+const GRID: number[][] = Array(ROWS).fill(Array(COLUMNS).fill(0));
 
 export type BoardProps = {
   className?: string;
@@ -16,7 +16,7 @@ const Board = ({ className }: BoardProps) => {
   const currentState = JSON.parse(currentStateCookie?.value ?? "{}");
 
   const cls = clsx(
-    "bg-white shadow-container border-3 p-2 flex flex-col pb-5 gap-2 rounded",
+    "bg-white shadow-container border-3 flex flex-col gap-2 p-2 pb-4 md:p-4 md:pb-6 md:gap-4  lg:gap-6 rounded-lg",
     className
   );
 
