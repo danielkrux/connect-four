@@ -15,6 +15,12 @@ const config: Config = {
       black: "#000000",
       white: "#ffffff",
     },
+    borderRadius: {
+      none: "0",
+      DEFAULT: "20px",
+      lg: "40px",
+      full: "9999px",
+    },
     fontSize: {
       l: [
         "56px",
@@ -59,9 +65,6 @@ const config: Config = {
       },
       borderWidth: {
         3: "3px",
-      },
-      rounded: {
-        "2xl": "20px",
       },
     },
   },

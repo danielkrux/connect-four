@@ -16,7 +16,7 @@ const Board = ({ className }: BoardProps) => {
   const currentState = JSON.parse(currentStateCookie?.value ?? "{}");
 
   const cls = clsx(
-    "bg-white shadow-container border-3 p-2 flex flex-col pb-5 gap-2 rounded-2xl",
+    "bg-white shadow-container border-3 p-2 flex flex-col pb-5 gap-2 rounded",
     className
   );
 

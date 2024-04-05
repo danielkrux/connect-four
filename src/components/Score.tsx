@@ -11,7 +11,7 @@ export default function Score({ player, score }: ScoreProps) {
   return (
     <div
       className={clsx(
-        "bg-white shadow-container border-3 py-2 rounded-2xl flex w-full",
+        "bg-white shadow-container border-3 py-2 rounded flex w-full",
         { "flex-row-reverse": player === "two" }
       )}
     >
