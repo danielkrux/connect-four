@@ -15,8 +15,8 @@ export default async function Game({ searchParams }: PageProps) {
     <main className="flex min-h-screen flex-col p-4">
       <Header />
       <div className="flex justify-between gap-4 mx-4">
-        <Score player="one" score={12} />
-        <Score player="two" score={23} />
+        <Score player="one" />
+        <Score player="two" />
       </div>
       <Board className="mt-12" />
       {!playerWon && <Status />}

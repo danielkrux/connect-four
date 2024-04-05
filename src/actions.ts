@@ -15,10 +15,6 @@ export async function calculateWin() {
     const [row, column] = keys[i].split(":").map(Number);
     const currentPlayer = currentState[keys[i]];
 
-    if (currentPlayer === 0) {
-      continue;
-    }
-
     const horizontalWin = Array.from({ length: 4 }).every((_, index) => {
       return currentState[`${row}:${column + index}`] === currentPlayer;
     });
@@ -36,6 +32,16 @@ export async function calculateWin() {
     });
 
     if (horizontalWin || verticalWin || diagonalWin || diagonalWinLeft) {
+      const currentWinsStr = cookies().get("wins");
+      const currentWins = JSON.parse(
+        currentWinsStr?.value ?? '{"1": 0, "2": 0}'
+      );
+      const newWins = {
+        ...currentWins,
+        [currentPlayer]: currentWins[currentPlayer] + 1,
+      };
+
+      cookies().set("wins", JSON.stringify(newWins));
       return currentPlayer;
     }
   }

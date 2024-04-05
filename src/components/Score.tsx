@@ -1,13 +1,18 @@
 import clsx from "clsx";
+import { cookies } from "next/headers";
 import Image from "next/image";
 import React from "react";
 
 type ScoreProps = {
   player: "one" | "two";
-  score: number;
 };
 
-export default function Score({ player, score }: ScoreProps) {
+export default function Score({ player }: ScoreProps) {
+  const currentWinsStr = cookies().get("wins");
+  const currentWins = JSON.parse(currentWinsStr?.value ?? '{"1": 0, "2": 0}');
+
+  const score = currentWins[player === "one" ? 1 : 2];
+
   return (
     <div
       className={clsx(
