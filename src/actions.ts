@@ -3,11 +3,10 @@
 import { cookies } from "next/headers";
 import { ROWS } from "./constants";
 
-export async function calculateWin() {
+export async function calculateWin(state?: Record<string, number>) {
   const currentStateStr = cookies().get("state");
-  const currentState: Record<string, number> = JSON.parse(
-    currentStateStr?.value ?? "{}"
-  );
+  const currentState: Record<string, number> =
+    state ?? JSON.parse(currentStateStr?.value ?? "{}");
 
   const keys = Object.keys(currentState);
 
@@ -32,16 +31,6 @@ export async function calculateWin() {
     });
 
     if (horizontalWin || verticalWin || diagonalWin || diagonalWinLeft) {
-      const currentWinsStr = cookies().get("wins");
-      const currentWins = JSON.parse(
-        currentWinsStr?.value ?? '{"1": 0, "2": 0}'
-      );
-      const newWins = {
-        ...currentWins,
-        [currentPlayer]: currentWins[currentPlayer] + 1,
-      };
-
-      cookies().set("wins", JSON.stringify(newWins));
       return currentPlayer;
     }
   }
@@ -75,7 +64,6 @@ export async function handleCellPress(rowIndex: number, columnIndex: number) {
   );
 
   let newLocation = `${rowIndex}:${columnIndex}`;
-  console.log(newLocation);
 
   if (cellsPlayedInColumn.length > ROWS) {
     return;
@@ -95,8 +83,16 @@ export async function handleCellPress(rowIndex: number, columnIndex: number) {
     [newLocation]: currentPlayer,
   };
 
-  if (await calculateWin()) {
-    return;
+  const playerWon = await calculateWin(newState);
+
+  if (playerWon) {
+    const currentWinsStr = cookies().get("wins");
+    const currentWins = JSON.parse(currentWinsStr?.value ?? '{"1": 0, "2": 0}');
+    const newWins = {
+      ...currentWins,
+      [currentPlayer]: currentWins[currentPlayer] + 1,
+    };
+    cookies().set("wins", JSON.stringify(newWins));
   }
 
   cookies().set("state", JSON.stringify(newState));

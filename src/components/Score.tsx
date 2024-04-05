@@ -28,8 +28,8 @@ export default function Score({ player, className }: ScoreProps) {
         width={60}
         height={60}
         className={clsx("absolute lg:-top-1/2 lg:translate-y-1/2", {
-          "-translate-x-1/2 lg:left-1/2 ": player === "one",
-          "translate-x-1/2 lg:right-1/2": player === "two",
+          "-translate-x-1/4 lg:-translate-x-1/2 lg:left-1/2 ": player === "one",
+          "translate-x-1/4 lg:translate-x-1/2 lg:right-1/2": player === "two",
         })}
       />
       <div
