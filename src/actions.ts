@@ -19,23 +19,23 @@ export async function calculateWin() {
       continue;
     }
 
-    const horizontalWin = [0, 1, 2, 3].every((offset) =>
-      [1, 2].includes(currentState[`${row}:${column + offset}`])
-    );
+    const horizontalWin = Array.from({ length: 4 }).every((_, index) => {
+      return currentState[`${row}:${column + index}`] === currentPlayer;
+    });
 
-    const verticalWin = [0, 1, 2, 3].every((offset) =>
-      [1, 2].includes(currentState[`${row + offset}:${column}`])
-    );
+    const verticalWin = Array.from({ length: 4 }).every((_, index) => {
+      return currentState[`${row + index}:${column}`] === currentPlayer;
+    });
 
-    // TODO: Implement diagonal win
-    // const diagonalWinRight = [0, 1, 2, 3].every((offset) =>
-    //   [1, 2].includes(currentState[`${row + offset}:${column + offset}`])
-    // );
-    // const diagonalWinLeft = [0, 1, 2, 3].every((offset) =>
-    //   [1, 2].includes(currentState[`${row - offset}:${column + offset}`])
-    // );
+    const diagonalWin = Array.from({ length: 4 }).every((_, index) => {
+      return currentState[`${row - index}:${column + index}`] === currentPlayer;
+    });
 
-    if (horizontalWin || verticalWin) {
+    const diagonalWinLeft = Array.from({ length: 4 }).every((_, index) => {
+      return currentState[`${row - index}:${column - index}`] === currentPlayer;
+    });
+
+    if (horizontalWin || verticalWin || diagonalWin || diagonalWinLeft) {
       return currentPlayer;
     }
   }

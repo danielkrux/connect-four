@@ -1,15 +1,16 @@
 "use client";
 
 import React from "react";
-import Button from "../Button";
 import { useRouter } from "next/navigation";
+
 import { restartGame } from "@/actions";
+import Button from "../Button";
 
 export default function MenuRestart() {
   const router = useRouter();
 
-  function handleRestart() {
-    restartGame();
+  async function handleRestart() {
+    await restartGame();
     router.back();
   }
 
