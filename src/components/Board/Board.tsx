@@ -5,29 +5,23 @@ import { cookies } from "next/headers";
 import BoardBlack from "../../../public/board-black.svg";
 import BoardWhite from "../../../public/board-white.svg";
 import Grid from "./Grid";
-import { COLUMNS, ROWS } from "@/constants";
+import { getCurrentPlayer } from "@/actions";
 
 export type BoardProps = {
   className?: string;
 };
 
-const GRID: number[][] = Array(ROWS).fill(Array(COLUMNS).fill(0));
-
-const Board = ({ className }: BoardProps) => {
+const Board = async ({ className }: BoardProps) => {
   const currentStateCookie = cookies().get("state");
   const currentState: Record<string, number> = JSON.parse(
     currentStateCookie?.value ?? "{}"
   );
-
-  const cls = clsx(
-    "bg-white relative shadow-container border-3 flex flex-col gap-2 p-2 pb-4 md:p-4 md:pb-6 md:gap-4  lg:gap-6 rounded-lg",
-    className
-  );
+  const currentPlayer = await getCurrentPlayer();
 
   return (
-    <div className="relative flex justify-center">
+    <div className="relative flex justify-center mt-14">
       <BoardBlack className="w-full" />
-      <Grid state={currentState} />
+      <Grid state={currentState} currentPlayer={currentPlayer} />
       <BoardWhite className="absolute w-full" />
     </div>
   );

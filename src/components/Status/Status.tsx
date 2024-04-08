@@ -8,14 +8,17 @@ export default async function Status() {
   const playerWon = await calculateWin();
 
   const backgroundClass = clsx(
-    "after:bg-darkpurple after:absolute after:bottom-0 after:left-0 after:right-0 after:h-1/3 after:rounded-t-[60px] after:-z-10",
+    "after:bg-darkpurple after:absolute after:bottom-0 after:left-0 after:right-0 after:h-1/3 lg:after:h-1/5 after:rounded-t-[60px] after:-z-10",
     {
       "after:bg-pink": playerWon === 1,
       "after:bg-yellow": playerWon === 2,
     }
   );
 
-  const cls = clsx("flex items-center justify-center mt-2", backgroundClass);
+  const cls = clsx(
+    "flex items-center justify-center mt-4 lg:-mt-4",
+    backgroundClass
+  );
 
   return (
     <div className={cls}>
@@ -26,9 +29,12 @@ export default async function Status() {
             <span className="text-l text-white">{currentPlayer}</span>
           </div>
           <Background
-            className={clsx("absolute text-pink w-[170px] aspect-square", {
-              "text-yellow": currentPlayer === 2,
-            })}
+            className={clsx(
+              "absolute text-pink w-[170px] lg:w-[300px] aspect-square",
+              {
+                "text-yellow": currentPlayer === 2,
+              }
+            )}
           />
         </>
       ) : (
