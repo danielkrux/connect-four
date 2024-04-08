@@ -19,10 +19,13 @@ export default function Indicator({
 
   return (
     <motion.div
-      className={clsx("absolute -top-[11%] rounded-full size-12 border-3", {
-        "bg-yellow": currentPlayer === 2,
-        "bg-pink": currentPlayer === 1,
-      })}
+      className={clsx(
+        "absolute -top-[11%] rounded-full size-12 border-3 sm:invisible lg:visible",
+        {
+          "bg-yellow": currentPlayer === 2,
+          "bg-pink": currentPlayer === 1,
+        }
+      )}
       animate={{
         translateX: currentIndexHover
           ? currentIndexHover * columnWidth + offset
