@@ -15,7 +15,7 @@ export default async function Status() {
     }
   );
 
-  const cls = clsx("flex items-center justify-center mt-5", backgroundClass);
+  const cls = clsx("flex items-center justify-center mt-2", backgroundClass);
 
   return (
     <div className={cls}>
@@ -24,10 +24,9 @@ export default async function Status() {
           <div className="flex flex-col items-center justify-center z-10">
             <span className="text-xs text-white">Player</span>
             <span className="text-l text-white">{currentPlayer}</span>
-            {/* <Timer currentPlayer={currentPlayer} /> */}
           </div>
           <Background
-            className={clsx("absolute text-pink", {
+            className={clsx("absolute text-pink w-[170px] aspect-square", {
               "text-yellow": currentPlayer === 2,
             })}
           />
@@ -45,7 +44,7 @@ export default async function Status() {
 
 function Background({ className }: { className: string }) {
   return (
-    <svg className={className} width="197" height="165">
+    <svg className={className} width="197" height="165" viewBox="0 0 197 165">
       <defs>
         <filter
           x="-4.2%"

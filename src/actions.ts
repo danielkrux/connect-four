@@ -48,7 +48,7 @@ export async function getCurrentPlayer() {
   return values?.at(values.length - 1) === 1 ? 2 : 1;
 }
 
-export async function handleCellPress(rowIndex: number, columnIndex: number) {
+export async function handleColumnClick(columnIndex: number) {
   const currentStateStr = cookies().get("state");
   const currentState: Record<string, number> = JSON.parse(
     currentStateStr?.value ?? "{}"
@@ -62,6 +62,10 @@ export async function handleCellPress(rowIndex: number, columnIndex: number) {
   const cellsPlayedInColumn = locations?.filter((loc) =>
     loc.includes(`:${columnIndex}`)
   );
+
+  const rowIndex = ROWS - cellsPlayedInColumn.length - 1;
+
+  console.log(rowIndex, columnIndex);
 
   let newLocation = `${rowIndex}:${columnIndex}`;
 
