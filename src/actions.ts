@@ -39,17 +39,13 @@ export async function calculateWin(state?: Record<string, number>) {
   return;
 }
 
-export async function getCurrentPlayer(state: Record<string, number> = {}) {
-  let s = state;
-  if (!s) {
-    const currentStateStr = cookies().get("state");
-    const currentState: Record<string, number> = JSON.parse(
-      currentStateStr?.value ?? "{}"
-    );
-    s = currentState;
-  }
+export async function getCurrentPlayer() {
+  const currentStateStr = cookies().get("state");
+  const currentState: Record<string, number> = JSON.parse(
+    currentStateStr?.value ?? "{}"
+  );
 
-  const values = Object.values(s);
+  const values = Object.values(currentState);
   return values?.at(values.length - 1) === 1 ? 2 : 1;
 }
 
