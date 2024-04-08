@@ -1,12 +1,14 @@
 "use client";
 
-import React from "react";
+import React, { useOptimistic, useTransition } from "react";
 import { motion } from "framer-motion";
-
-import { handleColumnClick } from "@/actions";
 import clsx from "clsx";
-import Indicator from "./Indicator";
+
+import { handleColumnClick as updateState } from "@/actions";
 import { COLUMNS } from "@/constants";
+import { calcNextRow } from "@/helpers";
+
+import Indicator from "./Indicator";
 
 const COLS: number[] = Array(COLUMNS).fill(0);
 
@@ -18,11 +20,32 @@ export default function Grid({
   currentPlayer: number;
 }) {
   const [currentHover, setCurrentHover] = React.useState<number | null>(null);
-  const stateArr = Object.entries(state);
+
+  const [_, startTransition] = useTransition();
+  const [optimisticState, addOptimistic] = useOptimistic(
+    state,
+    (currentState, optimisticValue: Record<string, number>) => {
+      return { ...currentState, ...optimisticValue };
+    }
+  );
+
+  const stateArr = Object.entries(optimisticState);
 
   const gridRef = React.useRef<HTMLDivElement>(null);
   const gridHeight = gridRef.current?.clientHeight ?? 0;
   const gridWidth = gridRef.current?.clientWidth ?? 0;
+
+  async function handleColumnClick(colIndex: number) {
+    const rowIndex = calcNextRow(optimisticState, colIndex);
+    const key = `${rowIndex}:${colIndex}`;
+    const optimisticValues = Object.values(optimisticState);
+    const player =
+      optimisticValues?.at(optimisticValues.length - 1) === 1 ? 2 : 1;
+    startTransition(() => {
+      addOptimistic({ [key]: player });
+      updateState(colIndex);
+    });
+  }
 
   return (
     <>

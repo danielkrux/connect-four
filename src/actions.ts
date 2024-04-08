@@ -2,6 +2,7 @@
 
 import { cookies } from "next/headers";
 import { ROWS } from "./constants";
+import { calcNextRow } from "./helpers";
 
 export async function calculateWin(state?: Record<string, number>) {
   const currentStateStr = cookies().get("state");
@@ -38,13 +39,17 @@ export async function calculateWin(state?: Record<string, number>) {
   return;
 }
 
-export async function getCurrentPlayer() {
-  const currentStateStr = cookies().get("state");
-  const currentState: Record<string, number> = JSON.parse(
-    currentStateStr?.value ?? "{}"
-  );
+export async function getCurrentPlayer(state: Record<string, number> = {}) {
+  let s = state;
+  if (!s) {
+    const currentStateStr = cookies().get("state");
+    const currentState: Record<string, number> = JSON.parse(
+      currentStateStr?.value ?? "{}"
+    );
+    s = currentState;
+  }
 
-  const values = Object.values(currentState);
+  const values = Object.values(s);
   return values?.at(values.length - 1) === 1 ? 2 : 1;
 }
 
@@ -63,13 +68,11 @@ export async function handleColumnClick(columnIndex: number) {
     loc.includes(`:${columnIndex}`)
   );
 
-  const rowIndex = ROWS - cellsPlayedInColumn.length - 1;
-
-  console.log(rowIndex, columnIndex);
+  const rowIndex = calcNextRow(currentState, columnIndex);
 
   let newLocation = `${rowIndex}:${columnIndex}`;
 
-  if (cellsPlayedInColumn.length > ROWS) {
+  if (cellsPlayedInColumn.length >= ROWS) {
     return;
   }
 
