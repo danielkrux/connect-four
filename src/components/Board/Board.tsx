@@ -19,7 +19,7 @@ const Board = async ({ className }: BoardProps) => {
   const currentPlayer = await getCurrentPlayer();
 
   return (
-    <div className="relative flex justify-center mt-14">
+    <div className={clsx("relative flex justify-center mt-14", className)}>
       <BoardBlack className="w-full" />
       <Grid state={currentState} currentPlayer={currentPlayer} />
       <BoardWhite className="absolute w-full" />

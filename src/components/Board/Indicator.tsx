@@ -3,6 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import clsx from "clsx";
+import { COLUMNS } from "@/constants";
 
 export default function Indicator({
   currentPlayer,
@@ -13,12 +14,12 @@ export default function Indicator({
   parentWidth: number;
   currentIndexHover: number | null;
 }) {
-  const columnWidth = parentWidth / 7;
+  const columnWidth = parentWidth / COLUMNS;
   const offset = columnWidth / 2 - 24;
 
   return (
     <motion.div
-      className={clsx("absolute -top-20 rounded-full h-12 w-12 border-3", {
+      className={clsx("absolute -top-[11%] rounded-full size-12 border-3", {
         "bg-yellow": currentPlayer === 2,
         "bg-pink": currentPlayer === 1,
       })}

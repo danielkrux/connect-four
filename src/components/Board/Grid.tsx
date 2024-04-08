@@ -6,8 +6,9 @@ import { motion } from "framer-motion";
 import { handleColumnClick } from "@/actions";
 import clsx from "clsx";
 import Indicator from "./Indicator";
+import { COLUMNS } from "@/constants";
 
-const COLS: number[] = Array(7).fill(0);
+const COLS: number[] = Array(COLUMNS).fill(0);
 
 export default function Grid({
   state,
