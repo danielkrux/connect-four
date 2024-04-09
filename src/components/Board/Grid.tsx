@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useOptimistic, useTransition } from "react";
+import React, { useOptimistic, useState, useTransition } from "react";
 import { motion } from "framer-motion";
 import clsx from "clsx";
 
@@ -19,7 +19,7 @@ export default function Grid({
   state: Record<string, number>;
   currentPlayer: number;
 }) {
-  const [currentHover, setCurrentHover] = React.useState<number | null>(null);
+  const [currentHover, setCurrentHover] = useState<number | null>(null);
 
   const [_, startTransition] = useTransition();
   const [optimisticState, addOptimistic] = useOptimistic(
@@ -63,7 +63,7 @@ export default function Grid({
             onMouseOver={() => setCurrentHover(colIndex)}
             onClick={() => handleColumnClick(colIndex)}
             key={`col-${colIndex}`}
-            className="flex flex-grow z-50 flex-col relative cursor-pointer"
+            className="flex flex-grow z-20 flex-col relative cursor-pointer"
           />
         ))}
       </div>

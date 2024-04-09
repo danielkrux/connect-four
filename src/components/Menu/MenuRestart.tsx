@@ -16,7 +16,7 @@ export default function MenuRestart() {
 
   return (
     <Button onClick={handleRestart} variant="white">
-      Restart
+      Restart game
     </Button>
   );
 }
