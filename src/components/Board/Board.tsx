@@ -5,7 +5,7 @@ import { cookies } from "next/headers";
 import BoardBlack from "../../../public/board-black.svg";
 import BoardWhite from "../../../public/board-white.svg";
 import Grid from "./Grid";
-import { getCurrentPlayer } from "@/actions";
+import { calculateWin, getCurrentPlayer } from "@/actions";
 
 export type BoardProps = {
   className?: string;
@@ -17,6 +17,7 @@ const Board = async ({ className }: BoardProps) => {
     currentStateCookie?.value ?? "{}"
   );
   const currentPlayer = await getCurrentPlayer();
+  const hasWin = await calculateWin(currentState);
 
   return (
     <div
@@ -26,7 +27,11 @@ const Board = async ({ className }: BoardProps) => {
       )}
     >
       <BoardBlack className="w-full" />
-      <Grid state={currentState} currentPlayer={currentPlayer} />
+      <Grid
+        state={currentState}
+        currentPlayer={currentPlayer}
+        hasWin={Boolean(hasWin)}
+      />
       <BoardWhite className="absolute w-full" />
     </div>
   );

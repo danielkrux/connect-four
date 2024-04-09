@@ -15,9 +15,11 @@ const COLS: number[] = Array(COLUMNS).fill(0);
 export default function Grid({
   state,
   currentPlayer,
+  hasWin,
 }: {
   state: Record<string, number>;
   currentPlayer: number;
+  hasWin: boolean;
 }) {
   const [currentHover, setCurrentHover] = useState<number | null>(null);
 
@@ -46,7 +48,7 @@ export default function Grid({
     ).length;
 
     startTransition(() => {
-      if (cellsPlayedInColumn >= ROWS) return;
+      if (cellsPlayedInColumn >= ROWS || hasWin) return;
       addOptimistic({ [key]: player });
       updateState(colIndex);
     });

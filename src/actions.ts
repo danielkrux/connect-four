@@ -54,6 +54,8 @@ export async function handleColumnClick(columnIndex: number) {
   const currentState: Record<string, number> = JSON.parse(
     currentStateStr?.value ?? "{}"
   );
+  const hasWin = await calculateWin(currentState);
+  if (hasWin) return;
 
   const values = Object.values(currentState);
   const locations = Object.keys(currentState);
@@ -63,8 +65,6 @@ export async function handleColumnClick(columnIndex: number) {
   const cellsPlayedInColumn = locations?.filter((loc) =>
     loc.includes(`:${columnIndex}`)
   );
-
-  console.log(cellsPlayedInColumn);
 
   const rowIndex = calcNextRow(currentState, columnIndex);
 
