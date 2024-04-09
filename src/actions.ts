@@ -64,6 +64,8 @@ export async function handleColumnClick(columnIndex: number) {
     loc.includes(`:${columnIndex}`)
   );
 
+  console.log(cellsPlayedInColumn);
+
   const rowIndex = calcNextRow(currentState, columnIndex);
 
   let newLocation = `${rowIndex}:${columnIndex}`;

@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import clsx from "clsx";
 
 import { handleColumnClick as updateState } from "@/actions";
-import { COLUMNS } from "@/constants";
+import { COLUMNS, ROWS } from "@/constants";
 import { calcNextRow } from "@/helpers";
 
 import Indicator from "./Indicator";
@@ -41,7 +41,12 @@ export default function Grid({
     const optimisticValues = Object.values(optimisticState);
     const player =
       optimisticValues?.at(optimisticValues.length - 1) === 1 ? 2 : 1;
+    const cellsPlayedInColumn = stateArr.filter((x) =>
+      x[0].includes(`:${colIndex}`)
+    ).length;
+
     startTransition(() => {
+      if (cellsPlayedInColumn >= ROWS) return;
       addOptimistic({ [key]: player });
       updateState(colIndex);
     });

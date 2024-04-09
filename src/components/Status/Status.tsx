@@ -38,7 +38,7 @@ export default async function Status() {
           />
         </>
       ) : (
-        <div className="bg-white border-3 shadow-container rounded px-7 flex flex-col items-center py-3 mx-4 -mt-4 md:-mt-10">
+        <div className="bg-white border-3 shadow-container rounded px-7 flex flex-col items-center py-3 mx-4 -mt-4 md:-mt-10 z-10">
           <span className="text-xs uppercase">player {playerWon}</span>
           <span className="text-l uppercase">wins</span>
           <RestartButton>Play again</RestartButton>
