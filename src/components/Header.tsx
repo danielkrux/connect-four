@@ -14,7 +14,7 @@ export default function Header() {
         Menu
       </Link>
       <Logo className="absolute left-1/2 -translate-x-1/2" />
-      <RestartButton>Replay round</RestartButton>
+      <RestartButton>Replay</RestartButton>
     </div>
   );
 }

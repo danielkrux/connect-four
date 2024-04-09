@@ -20,7 +20,7 @@ export default function Indicator({
   return (
     <motion.div
       className={clsx(
-        "absolute -top-[11%] rounded-full size-12 border-3 sm:invisible lg:visible",
+        "absolute -top-[11%] rounded-full size-12 border-3 invisible lg:visible",
         {
           "bg-yellow": currentPlayer === 2,
           "bg-pink": currentPlayer === 1,
